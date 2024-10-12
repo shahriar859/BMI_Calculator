@@ -1,0 +1,73 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.shahriar.bmi_calculator.BmiViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <!-- Weight Input -->
+        <EditText
+            android:id="@+id/et_weight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter weight (kg)"
+            android:inputType="numberDecimal"
+            android:text="@={viewModel.weight}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Height Input -->
+        <EditText
+            android:id="@+id/et_height"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter height (m)"
+            android:inputType="numberDecimal"
+            android:text="@={viewModel.height}"
+            app:layout_constraintTop_toBottomOf="@id/et_weight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- Calculate BMI Button -->
+        <Button
+            android:id="@+id/btn_calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calculate BMI"
+            app:layout_constraintTop_toBottomOf="@id/et_height"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{() -> viewModel.calculateBMI()}" />
+
+        <!-- BMI Result -->
+        <TextView
+            android:id="@+id/tv_bmi_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{"BMI: " + String.valueOf(viewModel.bmiResult)}'
+            app:layout_constraintTop_toBottomOf="@id/btn_calculate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- BMI Category -->
+        <TextView
+            android:id="@+id/tv_bmi_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{"Category: " + viewModel.bmiCategory}'
+            app:layout_constraintTop_toBottomOf="@id/tv_bmi_result"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
